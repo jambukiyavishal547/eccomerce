@@ -1,0 +1,94 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+	<body>
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Sing in</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="/">Home</a></li>
+							<li class="active">Sing in</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-4">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							{% if msg %}
+								<b style=" color: darkred;">{{msg}}</b>
+							{% endif %}
+							<form name="singup" method="POST" action="{% url 'singin' %}">
+								{% csrf_token %}
+							<div class="section-title">
+								<h3 class="title">Sing IN</h3>
+							</div>
+							<div class="form-group">
+								<input class="input" type="email" name="email" id="email" placeholder="Email">
+								<span id="email_error"></span>
+							</div>
+							<div class="form-group">
+								<input class="input" type="password" name="password" placeholder="Password">
+							</div>
+							<div class="form-group">
+									<div>
+										<input type="submit" name="action" class="primary-btn order-submit" value="SING IN"></input>
+										<a href="{% url 'forgot-password' %}"><input type="button" name="forgot-Pasaword" class="primary-btn order-submit" value="Forgot Password" ></input></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Billing Details -->
+
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+	</form>
+	<script>
+		$("#email").change(function(){
+			var email=$(this).val();
+			$.ajax({
+				url: '/ajax/validate_email/',
+				data:{
+					'email':email
+				},
+				datatype: 'json',
+				success: function(data){
+					if (!data.is_taken) {
+						document.getElementById("email_error").innerHTML="This Email Is NOT Exist"
+					}else{
+						document.getElementById("email_error").innerHTML="";
+					}
+				}
+			});
+		});
+	</script>
+	</body>
+</html>
+{% endblock %}

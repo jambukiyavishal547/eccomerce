@@ -1,0 +1,109 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>	
+
+    </head>
+	<body>
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">profile Update</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="/">Home</a></li>
+							<li class="active">profile Update</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-5">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							{% if msg %}
+								<b style=" color: darkred;">{{msg}}</b>
+							{% endif %}
+							<form name="profile" method="POST" action="{% url 'profile' %}">
+								{% csrf_token %}
+							<div class="section-title">
+								<h3 class="title">profile Update</h3>
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="fname" value="{{user.fname}}">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="lname" value="{{user.lname}}">
+							</div>
+							<div class="form-group">
+								<input class="input" type="email" name="email" value="{{user.email}}" readonly>
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="mobile" value="{{user.mobile}}">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="address" value="{{user.address}}">
+							</div>
+							<div class="form-group">
+								<img src="{{user.profile_pic.url}}" height="80px" width="80px">
+							</div>
+							<div class="form-group">
+								<input type="file" name="profile_pic">
+							</div>
+							<div class="form-group">
+								<div class="input-checkbox">
+									<div>
+										<input type="submit" name="action" class="primary-btn order-submit" value="UPDATE PROFILE"></input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Billing Details -->
+
+					</div>
+
+					<!-- Order Details -->
+					<!--<div class="form-group">
+								<input class="input" type="text" name="first-name" placeholder="First Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="last-name" placeholder="Last Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="email" name="email" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="mobile" placeholder="mobile">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="address" placeholder="Address">
+							</div> -->
+						<!--<a href="#" class="primary-btn order-submit">Place order</a> -->
+					</div>
+					<!-- /Order Details -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+	</form>
+	</body>
+</html>
+{% endblock %}
